@@ -23,3 +23,15 @@
 //
 // -- This will overwrite an existing command --
 // Cypress.Commands.overwrite('visit', (originalFn, url, options) => { ... })
+
+Cypress.Commands.add('deleteBoard', (boardId, token) => {
+    cy.request({
+        url: `https://cypress-api.vivifyscrum-stage.com/api/v2/boards/${boardId}`,
+        method: "DELETE",
+        auth: {
+            "bearer" : token
+        }
+    }).its("body").then(resp =>{
+        expect(resp.id).eq(boardId);
+    });
+ });

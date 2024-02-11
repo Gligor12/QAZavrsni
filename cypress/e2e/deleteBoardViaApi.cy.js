@@ -30,15 +30,7 @@ describe("Delete board Via API",()=> {
 
     it("Delete board", ()=>{
 
-       
-        cy.request({
-            url: `https://cypress-api.vivifyscrum-stage.com/api/v2/boards/${boardId}`,
-            method: "DELETE",
-            auth: {
-                "bearer" : token
-            }
-        }).its("body").then(resp =>{
-            expect(resp.id).eq(boardId);
-        });
+       cy.deleteBoard(boardId,token);
+       cy.visit("/my-organizations");
     });
 });
